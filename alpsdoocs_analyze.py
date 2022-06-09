@@ -15,7 +15,7 @@ from scipy import signal
 from scipy.io import savemat
 import numpy as np
 
-#import pydoocs
+import pydoocs
 
 from alpsdoocslib import BASE_ADDRESS, NR_ADDRESSES, NL_ADDRESSES, HN_ADDRESSES
 
