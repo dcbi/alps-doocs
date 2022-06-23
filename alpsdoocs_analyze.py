@@ -212,6 +212,7 @@ class SpectrumPlot(QWidget):
 
         self.buttonSaveData = QPushButton('Save Current Spectrum', self)
         self.buttonSaveData.clicked.connect(self.saveData)
+        self.buttonSaveData.setToolTip(SAVE_DATA_TIP)
 
         self.textEditConsole = QTextEdit(self)
         self.textEditConsole.setReadOnly(True)
@@ -362,7 +363,7 @@ class SpectrumPlot(QWidget):
     def saveData(self):
         now = datetime.now()
         freqs, ps = self.plotCurve.getData()
-        if freqs == None:
+        if isinstance(freqs, type(None)):
             self.print('No data plotted yet to save.')
             return
 
@@ -375,7 +376,7 @@ class SpectrumPlot(QWidget):
         chan_name = chan_name.replace('/', '_')
         chan_name = chan_name.replace('.', '_')
 
-        filepath = filepath +  + '/SpectrumData_' + chan_name + datetime.strftime(now, '%Y_%m_%dT%H_%M_%S')
+        filepath = filepath + '/SpectrumData_' + chan_name + '_' + datetime.strftime(now, '%Y_%m_%dT%H_%M_%S')
 
         savemat(filepath, {'frequencies':freqs, 'spectrum':ps}, appendmat=True)
         self.print("Saved file: ", filepath)
